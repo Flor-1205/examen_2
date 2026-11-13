@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\EmpleadoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('insumos', InsumoController::class)->middleware('auth');
     Route::resource('proveedores', ProveedorController::class)->middleware('auth');
+    Route::resource('empleados', EmpleadoController::class)->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

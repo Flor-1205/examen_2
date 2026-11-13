@@ -91,7 +91,7 @@
             <i class="bi bi-truck"></i> Proveedores
         </a>
 
-        <a href="#">
+        <a href="{{ route('empleados.index') }}">
             <i class="bi bi-people"></i> Recursos Humanos
         </a>
     </div>
