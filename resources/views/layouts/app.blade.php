@@ -87,7 +87,7 @@
             <i class="bi bi-building"></i> Fabricantes
         </a>
 
-        <a href="#">
+        <a href="{{ route('proveedores.index') }}">
             <i class="bi bi-truck"></i> Proveedores
         </a>
 
