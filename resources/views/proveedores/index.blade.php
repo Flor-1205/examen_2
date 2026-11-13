@@ -1,15 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        Gestión de Proveedores
-    </x-slot>
-
     <div class="container-fluid">
-
-        <div class="d-flex justify-content-between mb-4">
-            <h4>Listado de Proveedores</h4>
-
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold">Proveedores</h2>
+                <p class="text-muted">Administración de proveedores agrícolas</p>
+            </div>
             <a href="{{ route('proveedores.create') }}" class="btn btn-success">
-                <i class="bi bi-plus-circle"></i> Nuevo Proveedor
+                Nuevo proveedor
             </a>
         </div>
 
@@ -17,39 +14,26 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        @if($errors->any())
-            <div class="alert alert-danger">
-                @foreach($errors->all() as $error)
-                    <p class="mb-0">{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
-
-        <div class="card shadow-sm">
+        <div class="card border-0 shadow-sm">
             <div class="card-body table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-hover align-middle">
                     <thead class="table-success">
                         <tr>
                             <th>RTN</th>
                             <th>Empresa</th>
                             <th>Categoría</th>
-                            <th>Contacto</th>
-                            <th>Teléfono</th>
                             <th>Límite de crédito</th>
                             <th>Días de crédito</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @forelse($proveedores as $proveedor)
                             <tr>
                                 <td>{{ $proveedor->rtn }}</td>
                                 <td>{{ $proveedor->empresa }}</td>
                                 <td>{{ $proveedor->categoria }}</td>
-                                <td>{{ $proveedor->contacto }}</td>
-                                <td>{{ $proveedor->telefono }}</td>
                                 <td>L. {{ number_format($proveedor->limite_credito, 2) }}</td>
                                 <td>{{ $proveedor->dias_credito }} días</td>
                                 <td>
@@ -58,24 +42,21 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="{{ route('proveedores.edit', $proveedor) }}"
-                                       class="btn btn-warning btn-sm">Editar</a>
+                                    <a href="{{ route('proveedores.edit', $proveedor->id) }}"
+                                       class="btn btn-sm btn-warning">Editar</a>
 
-                                    <form action="{{ route('proveedores.destroy', $proveedor) }}"
-                                          method="POST" class="d-inline">
+                                    <form action="{{ route('proveedores.destroy', $proveedor->id) }}"
+                                          method="POST" class="d-inline"
+                                          onsubmit="return confirm('¿Eliminar proveedor?')">
                                         @csrf
                                         @method('DELETE')
-
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('¿Eliminar este proveedor?')">
-                                            Eliminar
-                                        </button>
+                                        <button class="btn btn-sm btn-danger">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center">
+                                <td colspan="7" class="text-center py-4">
                                     No hay proveedores registrados.
                                 </td>
                             </tr>

@@ -1,24 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        Registrar Proveedor
-    </x-slot>
-
     <div class="container-fluid">
-        <div class="card shadow-sm">
-            <div class="card-header bg-success text-white">
-                Información del proveedor
-            </div>
+        <h2 class="fw-bold mb-4">Registrar proveedor</h2>
 
+        <div class="card border-0 shadow-sm">
             <div class="card-body">
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <p class="mb-0">{{ $error }}</p>
-                        @endforeach
-                    </div>
-                @endif
-
                 <form action="{{ route('proveedores.store') }}" method="POST">
                     @csrf
 
@@ -27,57 +12,43 @@
                             <label class="form-label">RTN (14 dígitos)</label>
                             <input type="text" name="rtn" maxlength="14"
                                 class="form-control" value="{{ old('rtn') }}" required>
+                            @error('rtn') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombre de la empresa</label>
+                            <label class="form-label">Empresa o razón social</label>
                             <input type="text" name="empresa" class="form-control"
                                 value="{{ old('empresa') }}" required>
+                            @error('empresa') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Categoría</label>
                             <select name="categoria" class="form-select" required>
-                                <option value="">Seleccione</option>
-                                @foreach(['Químicos', 'Semilleros', 'Maquinaria'] as $categoria)
-                                    <option value="{{ $categoria }}"
-                                        {{ old('categoria') == $categoria ? 'selected' : '' }}>
-                                        {{ $categoria }}
-                                    </option>
-                                @endforeach
+                                <option value="">Seleccione una categoría</option>
+                                <option value="Químicos">Químicos</option>
+                                <option value="Semilleros">Semilleros</option>
+                                <option value="Maquinaria">Maquinaria</option>
                             </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Contacto (asesor comercial)</label>
-                            <input type="text" name="contacto" class="form-control"
-                                value="{{ old('contacto') }}" required>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Teléfono (8 dígitos)</label>
-                            <input type="text" name="telefono" maxlength="8"
-                                class="form-control" value="{{ old('telefono') }}" required>
+                            @error('categoria') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Límite de crédito (L.)</label>
-                            <input type="number" name="limite_credito" step="0.01"
-                                min="0" class="form-control"
-                                value="{{ old('limite_credito') }}" required>
+                            <input type="number" name="limite_credito" step="0.01" min="0"
+                                class="form-control" value="{{ old('limite_credito') }}" required>
+                            @error('limite_credito') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Días de crédito</label>
                             <select name="dias_credito" class="form-select" required>
-                                <option value="">Seleccione</option>
+                                <option value="">Seleccione los días</option>
                                 @foreach([15, 30, 45, 60] as $dias)
-                                    <option value="{{ $dias }}"
-                                        {{ old('dias_credito') == $dias ? 'selected' : '' }}>
-                                        {{ $dias }} días
-                                    </option>
+                                    <option value="{{ $dias }}">{{ $dias }} días</option>
                                 @endforeach
                             </select>
+                            @error('dias_credito') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -89,12 +60,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-success">
-                        Guardar Proveedor
-                    </button>
-
-                    <a href="{{ route('proveedores.index') }}"
-                       class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Guardar proveedor</button>
+                    <a href="{{ route('proveedores.index') }}" class="btn btn-secondary">Cancelar</a>
                 </form>
             </div>
         </div>

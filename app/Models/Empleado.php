@@ -10,11 +10,10 @@ class Empleado extends Model
 
     protected $fillable = [
         'identidad',
-        'nombres',
-        'apellidos',
+        'nombre',
         'cargo',
-        'salario',
-        'fecha_contratacion',
+        'sueldo_base',
+        'fecha_ingreso',
         'estado'
     ];
 }

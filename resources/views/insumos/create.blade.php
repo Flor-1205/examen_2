@@ -44,10 +44,10 @@
                             <select name="categoria" class="form-select" required>
                                 <option value="">Seleccione una categoría</option>
                                 <option value="Fertilizantes">Fertilizantes</option>
-                                <option value="Semillas">Semillas</option>
-                                <option value="Plaguicidas">Plaguicidas</option>
+                                <option value="Semillas Certificadas">Semillas Certificadas</option>
+                                <option value="Agroquímicos">Agroquímicos</option>
                                 <option value="Herramientas">Herramientas</option>
-                                <option value="Otros">Otros</option>
+                                <option value="Sistemas de Riego">Sistemas de Riego</option>
                             </select>
                         </div>
 

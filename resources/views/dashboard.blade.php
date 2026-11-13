@@ -70,6 +70,35 @@
 
         </div>
 
+
+<div class="card border-0 shadow-sm mt-4">
+    <div class="card-body">
+        <h5 class="fw-bold mb-3">
+            <i class="bi bi-exclamation-triangle text-danger"></i>
+            Alertas de inventario
+        </h5>
+
+        @forelse($insumosBajos as $insumo)
+            <div class="alert alert-danger d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ $insumo->nombre }}</strong>
+                    <br>
+                    <small>SKU: {{ $insumo->sku }}</small>
+                </div>
+
+                <span class="badge bg-danger">
+                    Stock: {{ $insumo->stock }}
+                </span>
+            </div>
+        @empty
+            <div class="alert alert-success mb-0">
+                No hay insumos con stock bajo. El inventario está en buen estado.
+            </div>
+        @endforelse
+    </div>
+</div>
+
+
         <div class="card border-0 shadow-sm mt-4">
             <div class="card-body">
                 <h5 class="fw-bold">Bienvenida a AGROVALLE HONDURAS</h5>

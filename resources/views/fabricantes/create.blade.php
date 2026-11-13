@@ -9,45 +9,47 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombre del fabricante</label>
-                            <input type="text" name="nombre" class="form-control"
-                                value="{{ old('nombre') }}" required>
-                            @error('nombre') <small class="text-danger">{{ $message }}</small> @enderror
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">RTN</label>
-                            <input type="text" name="rtn" maxlength="14" class="form-control"
-                                value="{{ old('rtn') }}" required>
+                            <label class="form-label">RTN (14 dígitos)</label>
+                            <input type="text" name="rtn" maxlength="14"
+                                class="form-control" value="{{ old('rtn') }}" required>
                             @error('rtn') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">País</label>
-                            <input type="text" name="pais" class="form-control"
-                                value="{{ old('pais') }}" required>
-                            @error('pais') <small class="text-danger">{{ $message }}</small> @enderror
+                            <label class="form-label">Empresa o razón social</label>
+                            <input type="text" name="empresa" class="form-control"
+                                value="{{ old('empresa') }}" required>
+                            @error('empresa') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Persona de contacto</label>
-                            <input type="text" name="contacto" class="form-control"
-                                value="{{ old('contacto') }}" required>
-                            @error('contacto') <small class="text-danger">{{ $message }}</small> @enderror
+                            <label class="form-label">Categoría</label>
+                            <select name="categoria" class="form-select" required>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="Quimicos">Químicos</option>
+                                <option value="Semilleros">Semilleros</option>
+                                <option value="Maquinaria">Maquinaria</option>
+                            </select>
+                            @error('categoria') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="text" name="telefono" maxlength="8" class="form-control"
-                                value="{{ old('telefono') }}" required>
-                            @error('telefono') <small class="text-danger">{{ $message }}</small> @enderror
+                            <label class="form-label">Límite de crédito (L.)</label>
+                            <input type="number" step="0.01" min="0"
+                                name="limite_credito" class="form-control"
+                                value="{{ old('limite_credito') }}" required>
+                            @error('limite_credito') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Correo electrónico</label>
-                            <input type="email" name="correo" class="form-control"
-                                value="{{ old('correo') }}">
-                            @error('correo') <small class="text-danger">{{ $message }}</small> @enderror
+                            <label class="form-label">Días de crédito</label>
+                            <select name="dias_credito" class="form-select" required>
+                                <option value="">Seleccione los días</option>
+                                @foreach([15, 30, 45, 60] as $dias)
+                                    <option value="{{ $dias }}">{{ $dias }} días</option>
+                                @endforeach
+                            </select>
+                            @error('dias_credito') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">

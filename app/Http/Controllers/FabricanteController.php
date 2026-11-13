@@ -10,7 +10,6 @@ class FabricanteController extends Controller
     public function index()
     {
         $fabricantes = Fabricante::all();
-
         return view('fabricantes.index', compact('fabricantes'));
     }
 
@@ -21,20 +20,16 @@ class FabricanteController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
+        $datos = $request->validate([
             'rtn' => 'required|digits:14|unique:fabricantes,rtn',
-            'pais' => 'required|string|max:255',
-            'contacto' => 'required|string|max:255',
-            'telefono' => 'required|digits:8',
-            'correo' => 'nullable|email|max:255',
+            'empresa' => 'required|string|max:255',
+            'categoria' => 'required|in:Quimicos,Semilleros,Maquinaria',
+            'limite_credito' => 'required|numeric|min:0',
+            'dias_credito' => 'required|in:15,30,45,60',
             'estado' => 'required|in:Activo,Inactivo'
         ]);
 
-        Fabricante::create($request->only([
-            'nombre', 'rtn', 'pais', 'contacto',
-            'telefono', 'correo', 'estado'
-        ]));
+        Fabricante::create($datos);
 
         return redirect()->route('fabricantes.index')
             ->with('success', 'Fabricante registrado correctamente.');
@@ -47,20 +42,16 @@ class FabricanteController extends Controller
 
     public function update(Request $request, Fabricante $fabricante)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
+        $datos = $request->validate([
             'rtn' => 'required|digits:14|unique:fabricantes,rtn,' . $fabricante->id,
-            'pais' => 'required|string|max:255',
-            'contacto' => 'required|string|max:255',
-            'telefono' => 'required|digits:8',
-            'correo' => 'nullable|email|max:255',
+            'empresa' => 'required|string|max:255',
+            'categoria' => 'required|in:Quimicos,Semilleros,Maquinaria',
+            'limite_credito' => 'required|numeric|min:0',
+            'dias_credito' => 'required|in:15,30,45,60',
             'estado' => 'required|in:Activo,Inactivo'
         ]);
 
-        $fabricante->update($request->only([
-            'nombre', 'rtn', 'pais', 'contacto',
-            'telefono', 'correo', 'estado'
-        ]));
+        $fabricante->update($datos);
 
         return redirect()->route('fabricantes.index')
             ->with('success', 'Fabricante actualizado correctamente.');

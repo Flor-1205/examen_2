@@ -20,18 +20,21 @@ Route::get('/dashboard', function () {
 
     $totalProveedores = Proveedor::where('estado', 'Activo')->count();
 
-    $totalEmpleados = Empleado::where('estado', 'Activo')->count();
+    $totalEmpleados = Empleado::count();
+
+    $insumosBajos = Insumo::where('stock', '<=', 5)->get();
 
     $valorInventario = Insumo::sum(
-        \Illuminate\Support\Facades\DB::raw('stock * costo')
+        \Illuminate\Support\Facades\DB::raw('stock * precio')
     );
 
     return view('dashboard', compact(
-        'totalInsumos',
-        'totalProveedores',
-        'totalEmpleados',
-        'valorInventario'
-    ));
+    'totalInsumos',
+    'totalProveedores',
+    'totalEmpleados',
+    'valorInventario',
+    'insumosBajos'
+));
 
 })->middleware('auth')->name('dashboard');
 

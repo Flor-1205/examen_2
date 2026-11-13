@@ -9,12 +9,11 @@ class Fabricante extends Model
     protected $table = 'fabricantes';
 
     protected $fillable = [
-        'nombre',
         'rtn',
-        'pais',
-        'contacto',
-        'telefono',
-        'correo',
+        'empresa',
+        'categoria',
+        'limite_credito',
+        'dias_credito',
         'estado'
     ];
 }

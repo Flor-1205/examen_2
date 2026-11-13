@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <h2 class="fw-bold mb-4">Editar empleado</h2>
 
-        <div class="card shadow-sm border-0">
+        <div class="card border-0 shadow-sm">
             <div class="card-body">
                 <form action="{{ route('empleados.update', $empleado->id) }}" method="POST">
                     @csrf
@@ -10,40 +10,48 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Número de identidad</label>
+                            <label class="form-label">Identidad</label>
                             <input type="text" name="identidad" maxlength="13"
-                                class="form-control" value="{{ old('identidad', $empleado->identidad) }}" required>
+                                class="form-control"
+                                value="{{ old('identidad', $empleado->identidad) }}" required>
                             @error('identidad') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombres</label>
-                            <input type="text" name="nombres" class="form-control"
-                                value="{{ old('nombres', $empleado->nombres) }}" required>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Apellidos</label>
-                            <input type="text" name="apellidos" class="form-control"
-                                value="{{ old('apellidos', $empleado->apellidos) }}" required>
+                            <label class="form-label">Nombre completo</label>
+                            <input type="text" name="nombre" class="form-control"
+                                value="{{ old('nombre', $empleado->nombre) }}" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Cargo</label>
-                            <input type="text" name="cargo" class="form-control"
-                                value="{{ old('cargo', $empleado->cargo) }}" required>
+                            <select name="cargo" class="form-select" required>
+                                @foreach([
+                                    'Ingeniero Agrónomo',
+                                    'Asesor Técnico de Campo',
+                                    'Jefe de Bodega Central',
+                                    'Operador de Maquinaria'
+                                ] as $cargo)
+                                    <option value="{{ $cargo }}"
+                                        {{ $empleado->cargo == $cargo ? 'selected' : '' }}>
+                                        {{ $cargo }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Salario (L.)</label>
-                            <input type="number" step="0.01" min="0" name="salario"
-                                class="form-control" value="{{ old('salario', $empleado->salario) }}" required>
+                            <label class="form-label">Sueldo base (L.)</label>
+                            <input type="number" name="sueldo_base" step="0.01" min="0"
+                                class="form-control"
+                                value="{{ old('sueldo_base', $empleado->sueldo_base) }}" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Fecha de contratación</label>
-                            <input type="date" name="fecha_contratacion"
-                                class="form-control" value="{{ old('fecha_contratacion', $empleado->fecha_contratacion) }}" required>
+                            <label class="form-label">Fecha de ingreso</label>
+                            <input type="date" name="fecha_ingreso"
+                                class="form-control"
+                                value="{{ old('fecha_ingreso', $empleado->fecha_ingreso) }}" required>
                         </div>
 
                         <div class="col-md-6 mb-3">

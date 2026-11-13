@@ -12,8 +12,6 @@ class Proveedor extends Model
         'rtn',
         'empresa',
         'categoria',
-        'contacto',
-        'telefono',
         'limite_credito',
         'dias_credito',
         'estado'

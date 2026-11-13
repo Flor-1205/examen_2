@@ -40,12 +40,11 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Categoría</label>
                             <select name="categoria" class="form-select" required>
-                                @foreach (['Fertilizantes', 'Semillas', 'Plaguicidas', 'Herramientas', 'Otros'] as $categoria)
-                                    <option value="{{ $categoria }}"
-                                        {{ old('categoria', $insumo->categoria) == $categoria ? 'selected' : '' }}>
-                                        {{ $categoria }}
-                                    </option>
-                                @endforeach
+                                <option value="Fertilizantes" {{ $insumo->categoria == 'Fertilizantes' ? 'selected' : '' }}>Fertilizantes</option>
+                                <option value="Semillas Certificadas" {{ $insumo->categoria == 'Semillas Certificadas' ? 'selected' : '' }}>Semillas Certificadas</option>
+                                <option value="Agroquímicos" {{ $insumo->categoria == 'Agroquímicos' ? 'selected' : '' }}>Agroquímicos</option>
+                                <option value="Herramientas" {{ $insumo->categoria == 'Herramientas' ? 'selected' : '' }}>Herramientas</option>
+                                <option value="Sistemas de Riego" {{ $insumo->categoria == 'Sistemas de Riego' ? 'selected' : '' }}>Sistemas de Riego</option>
                             </select>
                         </div>
 

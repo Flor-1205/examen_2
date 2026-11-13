@@ -10,41 +10,45 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombre del fabricante</label>
-                            <input type="text" name="nombre" class="form-control"
-                                value="{{ old('nombre', $fabricante->nombre) }}" required>
-                            @error('nombre') <small class="text-danger">{{ $message }}</small> @enderror
-                        </div>
-
-                        <div class="col-md-6 mb-3">
                             <label class="form-label">RTN</label>
-                            <input type="text" name="rtn" maxlength="14" class="form-control"
+                            <input type="text" name="rtn" maxlength="14"
+                                class="form-control"
                                 value="{{ old('rtn', $fabricante->rtn) }}" required>
                             @error('rtn') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">País</label>
-                            <input type="text" name="pais" class="form-control"
-                                value="{{ old('pais', $fabricante->pais) }}" required>
+                            <label class="form-label">Empresa o razón social</label>
+                            <input type="text" name="empresa" class="form-control"
+                                value="{{ old('empresa', $fabricante->empresa) }}" required>
+                            @error('empresa') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Persona de contacto</label>
-                            <input type="text" name="contacto" class="form-control"
-                                value="{{ old('contacto', $fabricante->contacto) }}" required>
+                            <label class="form-label">Categoría</label>
+                            <select name="categoria" class="form-select" required>
+                                <option value="Quimicos" {{ $fabricante->categoria == 'Quimicos' ? 'selected' : '' }}>Químicos</option>
+                                <option value="Semilleros" {{ $fabricante->categoria == 'Semilleros' ? 'selected' : '' }}>Semilleros</option>
+                                <option value="Maquinaria" {{ $fabricante->categoria == 'Maquinaria' ? 'selected' : '' }}>Maquinaria</option>
+                            </select>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="text" name="telefono" maxlength="8" class="form-control"
-                                value="{{ old('telefono', $fabricante->telefono) }}" required>
+                            <label class="form-label">Límite de crédito (L.)</label>
+                            <input type="number" step="0.01" min="0"
+                                name="limite_credito" class="form-control"
+                                value="{{ old('limite_credito', $fabricante->limite_credito) }}" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Correo electrónico</label>
-                            <input type="email" name="correo" class="form-control"
-                                value="{{ old('correo', $fabricante->correo) }}">
+                            <label class="form-label">Días de crédito</label>
+                            <select name="dias_credito" class="form-select" required>
+                                @foreach([15, 30, 45, 60] as $dias)
+                                    <option value="{{ $dias }}" {{ $fabricante->dias_credito == $dias ? 'selected' : '' }}>
+                                        {{ $dias }} días
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-md-6 mb-3">
