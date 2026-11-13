@@ -5,14 +5,35 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\EmpleadoController;
+use App\Models\Insumo;
+use App\Models\Proveedor;
+use App\Models\Empleado;
+use App\Http\Controllers\FabricanteController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+    $totalInsumos = Insumo::count();
+
+    $totalProveedores = Proveedor::where('estado', 'Activo')->count();
+
+    $totalEmpleados = Empleado::where('estado', 'Activo')->count();
+
+    $valorInventario = Insumo::sum(
+        \Illuminate\Support\Facades\DB::raw('stock * costo')
+    );
+
+    return view('dashboard', compact(
+        'totalInsumos',
+        'totalProveedores',
+        'totalEmpleados',
+        'valorInventario'
+    ));
+
+})->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -21,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('insumos', InsumoController::class)->middleware('auth');
     Route::resource('proveedores', ProveedorController::class)->middleware('auth');
     Route::resource('empleados', EmpleadoController::class)->middleware('auth');
+    Route::resource('fabricantes', FabricanteController::class)->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

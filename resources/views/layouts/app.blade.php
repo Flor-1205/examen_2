@@ -83,7 +83,7 @@
             <i class="bi bi-box-seam"></i> Insumos
         </a>
 
-        <a href="#">
+        <a href="{{ route('fabricantes.index') }}">
             <i class="bi bi-building"></i> Fabricantes
         </a>
 
